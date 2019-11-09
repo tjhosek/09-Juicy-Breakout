@@ -1,6 +1,8 @@
 extends Particles2D
 
-
+onready var timer = get_node("Timer")
 
 func _ready():
-	material.color = Color(0,0,0)
+	timer.wait_time = lifetime
+	timer.start(lifetime)
+	#queue_free()

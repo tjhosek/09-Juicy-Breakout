@@ -1,27 +1,59 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Scripts/World.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/Paddle.gd" type="Script" id=2]
 [ext_resource path="res://Assets/ball.png" type="Texture" id=3]
-[ext_resource path="res://Scenes/Ball.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Scenes/Tile.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Assets/PressStart2P-Regular.ttf" type="DynamicFontData" id=6]
-[ext_resource path="res://Scripts/Score.gd" type="Script" id=7]
-[ext_resource path="res://Scripts/Lives.gd" type="Script" id=8]
+[ext_resource path="res://Scenes/Tile.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Assets/PressStart2P-Regular.ttf" type="DynamicFontData" id=5]
+[ext_resource path="res://Scripts/Score.gd" type="Script" id=6]
+[ext_resource path="res://Scripts/Lives.gd" type="Script" id=7]
+[ext_resource path="res://Scripts/Combo.gd" type="Script" id=8]
+
+[sub_resource type="ParticlesMaterial" id=5]
+emission_shape = 2
+emission_box_extents = Vector3( 1, 448, 1 )
+flag_disable_z = true
+spread = 0.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 100.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale = 10.0
+scale_random = 1.0
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 64, 15.5615 )
 
 [sub_resource type="DynamicFont" id=2]
-font_data = ExtResource( 6 )
+font_data = ExtResource( 5 )
 
 [sub_resource type="DynamicFont" id=3]
-font_data = ExtResource( 6 )
+font_data = ExtResource( 5 )
+
+[sub_resource type="DynamicFont" id=4]
+font_data = ExtResource( 5 )
 
 [node name="World" type="Node"]
 script = ExtResource( 1 )
 
-[node name="Paddle" type="KinematicBody2D" parent="."]
+[node name="Background" type="ColorRect" parent="."]
+modulate = Color( 0, 0, 0, 1 )
+show_behind_parent = true
+margin_left = -32.0
+margin_top = -32.0
+margin_right = 1056.0
+margin_bottom = 608.0
+
+[node name="Stars" type="Particles2D" parent="."]
+position = Vector2( 512, 0 )
+rotation = 1.5708
+amount = 300
+lifetime = 40.0
+process_material = SubResource( 5 )
+
+[node name="Paddle" type="KinematicBody2D" parent="." groups=[
+"Paddle",
+]]
 position = Vector2( 512, 576 )
 motion/sync_to_physics = true
 script = ExtResource( 2 )
@@ -30,6 +62,7 @@ __meta__ = {
 }
 
 [node name="ElasticTween" type="Tween" parent="Paddle"]
+playback_process_mode = 0
 
 [node name="Sprite" type="Sprite" parent="Paddle"]
 position = Vector2( 1.52588e-005, 0 )
@@ -39,7 +72,152 @@ texture = ExtResource( 3 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Paddle"]
 shape = SubResource( 1 )
 
-[node name="Ball" parent="." instance=ExtResource( 4 )]
+[node name="Tiles" type="Node" parent="."]
+
+[node name="RowA" type="Node" parent="Tiles"]
+
+[node name="Tile" parent="Tiles/RowA" instance=ExtResource( 4 )]
+position = Vector2( 128, 384 )
+
+[node name="Tile3" parent="Tiles/RowA" instance=ExtResource( 4 )]
+position = Vector2( 224, 384 )
+
+[node name="Tile4" parent="Tiles/RowA" instance=ExtResource( 4 )]
+position = Vector2( 320, 384 )
+
+[node name="Tile5" parent="Tiles/RowA" instance=ExtResource( 4 )]
+position = Vector2( 416, 384 )
+
+[node name="Tile6" parent="Tiles/RowA" instance=ExtResource( 4 )]
+position = Vector2( 512, 384 )
+
+[node name="Tile7" parent="Tiles/RowA" instance=ExtResource( 4 )]
+position = Vector2( 608, 384 )
+
+[node name="Tile8" parent="Tiles/RowA" instance=ExtResource( 4 )]
+position = Vector2( 704, 384 )
+
+[node name="Tile9" parent="Tiles/RowA" instance=ExtResource( 4 )]
+position = Vector2( 800, 384 )
+
+[node name="Tile10" parent="Tiles/RowA" instance=ExtResource( 4 )]
+position = Vector2( 896, 384 )
+
+[node name="RowB" type="Node" parent="Tiles"]
+
+[node name="Tile" parent="Tiles/RowB" instance=ExtResource( 4 )]
+position = Vector2( 128, 320 )
+
+[node name="Tile2" parent="Tiles/RowB" instance=ExtResource( 4 )]
+position = Vector2( 224, 320 )
+
+[node name="Tile3" parent="Tiles/RowB" instance=ExtResource( 4 )]
+position = Vector2( 320, 320 )
+
+[node name="Tile4" parent="Tiles/RowB" instance=ExtResource( 4 )]
+position = Vector2( 416, 320 )
+
+[node name="Tile5" parent="Tiles/RowB" instance=ExtResource( 4 )]
+position = Vector2( 512, 320 )
+
+[node name="Tile6" parent="Tiles/RowB" instance=ExtResource( 4 )]
+position = Vector2( 608, 320 )
+
+[node name="Tile7" parent="Tiles/RowB" instance=ExtResource( 4 )]
+position = Vector2( 704, 320 )
+
+[node name="Tile8" parent="Tiles/RowB" instance=ExtResource( 4 )]
+position = Vector2( 800, 320 )
+
+[node name="Tile9" parent="Tiles/RowB" instance=ExtResource( 4 )]
+position = Vector2( 896, 320 )
+
+[node name="RowC" type="Node" parent="Tiles"]
+
+[node name="Tile" parent="Tiles/RowC" instance=ExtResource( 4 )]
+position = Vector2( 128, 256 )
+
+[node name="Tile2" parent="Tiles/RowC" instance=ExtResource( 4 )]
+position = Vector2( 224, 256 )
+
+[node name="Tile3" parent="Tiles/RowC" instance=ExtResource( 4 )]
+position = Vector2( 320, 256 )
+
+[node name="Tile4" parent="Tiles/RowC" instance=ExtResource( 4 )]
+position = Vector2( 416, 256 )
+
+[node name="Tile5" parent="Tiles/RowC" instance=ExtResource( 4 )]
+position = Vector2( 512, 256 )
+
+[node name="Tile6" parent="Tiles/RowC" instance=ExtResource( 4 )]
+position = Vector2( 608, 256 )
+
+[node name="Tile7" parent="Tiles/RowC" instance=ExtResource( 4 )]
+position = Vector2( 704, 256 )
+
+[node name="Tile8" parent="Tiles/RowC" instance=ExtResource( 4 )]
+position = Vector2( 800, 256 )
+
+[node name="Tile9" parent="Tiles/RowC" instance=ExtResource( 4 )]
+position = Vector2( 896, 256 )
+
+[node name="RowD" type="Node" parent="Tiles"]
+
+[node name="Tile" parent="Tiles/RowD" instance=ExtResource( 4 )]
+position = Vector2( 128, 192 )
+
+[node name="Tile2" parent="Tiles/RowD" instance=ExtResource( 4 )]
+position = Vector2( 224, 192 )
+
+[node name="Tile3" parent="Tiles/RowD" instance=ExtResource( 4 )]
+position = Vector2( 320, 192 )
+
+[node name="Tile4" parent="Tiles/RowD" instance=ExtResource( 4 )]
+position = Vector2( 416, 192 )
+
+[node name="Tile5" parent="Tiles/RowD" instance=ExtResource( 4 )]
+position = Vector2( 512, 192 )
+
+[node name="Tile6" parent="Tiles/RowD" instance=ExtResource( 4 )]
+position = Vector2( 608, 192 )
+
+[node name="Tile7" parent="Tiles/RowD" instance=ExtResource( 4 )]
+position = Vector2( 704, 192 )
+
+[node name="Tile8" parent="Tiles/RowD" instance=ExtResource( 4 )]
+position = Vector2( 800, 192 )
+
+[node name="Tile9" parent="Tiles/RowD" instance=ExtResource( 4 )]
+position = Vector2( 896, 192 )
+
+[node name="RowE" type="Node" parent="Tiles"]
+
+[node name="Tile" parent="Tiles/RowE" instance=ExtResource( 4 )]
+position = Vector2( 128, 128 )
+
+[node name="Tile2" parent="Tiles/RowE" instance=ExtResource( 4 )]
+position = Vector2( 224, 128 )
+
+[node name="Tile3" parent="Tiles/RowE" instance=ExtResource( 4 )]
+position = Vector2( 320, 128 )
+
+[node name="Tile4" parent="Tiles/RowE" instance=ExtResource( 4 )]
+position = Vector2( 416, 128 )
+
+[node name="Tile5" parent="Tiles/RowE" instance=ExtResource( 4 )]
+position = Vector2( 512, 128 )
+
+[node name="Tile6" parent="Tiles/RowE" instance=ExtResource( 4 )]
+position = Vector2( 608, 128 )
+
+[node name="Tile7" parent="Tiles/RowE" instance=ExtResource( 4 )]
+position = Vector2( 704, 128 )
+
+[node name="Tile8" parent="Tiles/RowE" instance=ExtResource( 4 )]
+position = Vector2( 800, 128 )
+
+[node name="Tile9" parent="Tiles/RowE" instance=ExtResource( 4 )]
+position = Vector2( 896, 128 )
 
 [node name="Border" type="StaticBody2D" parent="."]
 editor/display_folded = true
@@ -65,153 +243,6 @@ position = Vector2( 9.53674e-007, 320 )
 scale = Vector2( 2, 18 )
 texture = ExtResource( 3 )
 
-[node name="Tiles" type="Node" parent="."]
-
-[node name="RowA" type="Node" parent="Tiles"]
-
-[node name="Tile" parent="Tiles/RowA" instance=ExtResource( 5 )]
-position = Vector2( 128, 384 )
-
-[node name="Tile3" parent="Tiles/RowA" instance=ExtResource( 5 )]
-position = Vector2( 224, 384 )
-
-[node name="Tile4" parent="Tiles/RowA" instance=ExtResource( 5 )]
-position = Vector2( 320, 384 )
-
-[node name="Tile5" parent="Tiles/RowA" instance=ExtResource( 5 )]
-position = Vector2( 416, 384 )
-
-[node name="Tile6" parent="Tiles/RowA" instance=ExtResource( 5 )]
-position = Vector2( 512, 384 )
-
-[node name="Tile7" parent="Tiles/RowA" instance=ExtResource( 5 )]
-position = Vector2( 608, 384 )
-
-[node name="Tile8" parent="Tiles/RowA" instance=ExtResource( 5 )]
-position = Vector2( 704, 384 )
-
-[node name="Tile9" parent="Tiles/RowA" instance=ExtResource( 5 )]
-position = Vector2( 800, 384 )
-
-[node name="Tile10" parent="Tiles/RowA" instance=ExtResource( 5 )]
-position = Vector2( 896, 384 )
-
-[node name="RowB" type="Node" parent="Tiles"]
-
-[node name="Tile" parent="Tiles/RowB" instance=ExtResource( 5 )]
-position = Vector2( 128, 320 )
-
-[node name="Tile2" parent="Tiles/RowB" instance=ExtResource( 5 )]
-position = Vector2( 224, 320 )
-
-[node name="Tile3" parent="Tiles/RowB" instance=ExtResource( 5 )]
-position = Vector2( 320, 320 )
-
-[node name="Tile4" parent="Tiles/RowB" instance=ExtResource( 5 )]
-position = Vector2( 416, 320 )
-
-[node name="Tile5" parent="Tiles/RowB" instance=ExtResource( 5 )]
-position = Vector2( 512, 320 )
-
-[node name="Tile6" parent="Tiles/RowB" instance=ExtResource( 5 )]
-position = Vector2( 608, 320 )
-
-[node name="Tile7" parent="Tiles/RowB" instance=ExtResource( 5 )]
-position = Vector2( 704, 320 )
-
-[node name="Tile8" parent="Tiles/RowB" instance=ExtResource( 5 )]
-position = Vector2( 800, 320 )
-
-[node name="Tile9" parent="Tiles/RowB" instance=ExtResource( 5 )]
-position = Vector2( 896, 320 )
-
-[node name="RowC" type="Node" parent="Tiles"]
-
-[node name="Tile" parent="Tiles/RowC" instance=ExtResource( 5 )]
-position = Vector2( 128, 256 )
-
-[node name="Tile2" parent="Tiles/RowC" instance=ExtResource( 5 )]
-position = Vector2( 224, 256 )
-
-[node name="Tile3" parent="Tiles/RowC" instance=ExtResource( 5 )]
-position = Vector2( 320, 256 )
-
-[node name="Tile4" parent="Tiles/RowC" instance=ExtResource( 5 )]
-position = Vector2( 416, 256 )
-
-[node name="Tile5" parent="Tiles/RowC" instance=ExtResource( 5 )]
-position = Vector2( 512, 256 )
-
-[node name="Tile6" parent="Tiles/RowC" instance=ExtResource( 5 )]
-position = Vector2( 608, 256 )
-
-[node name="Tile7" parent="Tiles/RowC" instance=ExtResource( 5 )]
-position = Vector2( 704, 256 )
-
-[node name="Tile8" parent="Tiles/RowC" instance=ExtResource( 5 )]
-position = Vector2( 800, 256 )
-
-[node name="Tile9" parent="Tiles/RowC" instance=ExtResource( 5 )]
-position = Vector2( 896, 256 )
-
-[node name="RowD" type="Node" parent="Tiles"]
-
-[node name="Tile" parent="Tiles/RowD" instance=ExtResource( 5 )]
-position = Vector2( 128, 192 )
-
-[node name="Tile2" parent="Tiles/RowD" instance=ExtResource( 5 )]
-position = Vector2( 224, 192 )
-
-[node name="Tile3" parent="Tiles/RowD" instance=ExtResource( 5 )]
-position = Vector2( 320, 192 )
-
-[node name="Tile4" parent="Tiles/RowD" instance=ExtResource( 5 )]
-position = Vector2( 416, 192 )
-
-[node name="Tile5" parent="Tiles/RowD" instance=ExtResource( 5 )]
-position = Vector2( 512, 192 )
-
-[node name="Tile6" parent="Tiles/RowD" instance=ExtResource( 5 )]
-position = Vector2( 608, 192 )
-
-[node name="Tile7" parent="Tiles/RowD" instance=ExtResource( 5 )]
-position = Vector2( 704, 192 )
-
-[node name="Tile8" parent="Tiles/RowD" instance=ExtResource( 5 )]
-position = Vector2( 800, 192 )
-
-[node name="Tile9" parent="Tiles/RowD" instance=ExtResource( 5 )]
-position = Vector2( 896, 192 )
-
-[node name="RowE" type="Node" parent="Tiles"]
-
-[node name="Tile" parent="Tiles/RowE" instance=ExtResource( 5 )]
-position = Vector2( 128, 128 )
-
-[node name="Tile2" parent="Tiles/RowE" instance=ExtResource( 5 )]
-position = Vector2( 224, 128 )
-
-[node name="Tile3" parent="Tiles/RowE" instance=ExtResource( 5 )]
-position = Vector2( 320, 128 )
-
-[node name="Tile4" parent="Tiles/RowE" instance=ExtResource( 5 )]
-position = Vector2( 416, 128 )
-
-[node name="Tile5" parent="Tiles/RowE" instance=ExtResource( 5 )]
-position = Vector2( 512, 128 )
-
-[node name="Tile6" parent="Tiles/RowE" instance=ExtResource( 5 )]
-position = Vector2( 608, 128 )
-
-[node name="Tile7" parent="Tiles/RowE" instance=ExtResource( 5 )]
-position = Vector2( 704, 128 )
-
-[node name="Tile8" parent="Tiles/RowE" instance=ExtResource( 5 )]
-position = Vector2( 800, 128 )
-
-[node name="Tile9" parent="Tiles/RowE" instance=ExtResource( 5 )]
-position = Vector2( 896, 128 )
-
 [node name="Score" type="Label" parent="."]
 margin_left = 64.0
 margin_top = 32.0
@@ -220,7 +251,7 @@ margin_bottom = 64.0
 custom_fonts/font = SubResource( 2 )
 text = "Score:"
 valign = 1
-script = ExtResource( 7 )
+script = ExtResource( 6 )
 
 [node name="Lives" type="Label" parent="."]
 margin_left = 864.0
@@ -229,5 +260,16 @@ margin_right = 960.0
 margin_bottom = 64.0
 custom_fonts/font = SubResource( 3 )
 text = "Lives:"
+valign = 1
+script = ExtResource( 7 )
+
+[node name="Combo" type="Label" parent="."]
+margin_left = 448.0
+margin_top = 32.0
+margin_right = 576.0
+margin_bottom = 64.0
+custom_fonts/font = SubResource( 4 )
+text = "Test"
+align = 1
 valign = 1
 script = ExtResource( 8 )

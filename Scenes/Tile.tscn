@@ -11,15 +11,19 @@ extents = Vector2( 32, 16 )
 ]]
 position = Vector2( 128, 385.863 )
 script = ExtResource( 1 )
-__meta__ = {
-"_edit_group_": true
-}
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( -2.98023e-007, -16.9315 )
+position = Vector2( 0, -1.86302 )
 scale = Vector2( 2, 0.941781 )
 texture = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0, -17.863 )
+position = Vector2( 0, -1.86302 )
 shape = SubResource( 1 )
+
+[node name="FallTween" type="Tween" parent="."]
+
+[node name="ColorShift" type="Tween" parent="."]
+repeat = true
+playback_process_mode = 0
+playback/repeat = true
