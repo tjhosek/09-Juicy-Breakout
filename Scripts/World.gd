@@ -7,26 +7,12 @@ export var combo = 0
 
 var comboEffects = {
 	0:[Color(0,0,0),1,Color(1,1,1)],
-	5:[Color(.2,0,.25),1.5,Color(1,1,1)],
-	10:[Color(.5,.25,.5),2,Color(.8,.8,.8)],
-	15:[Color(.75,.5,.75),2.5,Color(.5,.5,.5)],
-	20:[Color(1,.75,1),3,Color(.25,.25,.25)],
-	25:[Color(1,1,1),3.5,Color(0,0,0)]
+	3:[Color(.2,0,.25),1.5,Color(1,1,1)],
+	6:[Color(.5,.25,.5),2,Color(.8,.8,.8)],
+	9:[Color(.75,.5,.75),2.5,Color(.5,.5,.5)],
+	12:[Color(1,.75,1),3,Color(.25,.25,.25)],
+	15:[Color(1,1,1),3.5,Color(0,0,0)]
 }
-
-var whiteList = [
-	find_node('Score'),
-	find_node('Combo'),
-	find_node('Lives'),
-	find_node('Border'),
-	find_node('Paddle'),
-	find_node('Ball'),
-	find_node('Stars')
-]
-
-var blackList = [
-	find_node('Background')
-]
 
 func increase_score(s):
 	score += int(s)
@@ -53,12 +39,13 @@ func update_combo(n):
 	find_node("Combo").update_combo()
 	var level = 0
 	for i in comboEffects:
-		if combo > i:
+		if combo >= i:
 			level = i
 	var effects = comboEffects[level]
+	var whiteList = get_tree().get_nodes_in_group("White")
+	var blackList = get_tree().get_nodes_in_group("Black")
 	for i in whiteList:
-		i.set_modulate(effects[2])
+		i.modulate = effects[2]
 	for i in blackList:
-		i.set_modulate(effects[0])
-	find_node('Stars').speed_scale = effects[1]
-	
+		i.modulate = effects[0]
+	self.get_node("Stars").speed_scale = effects[1]

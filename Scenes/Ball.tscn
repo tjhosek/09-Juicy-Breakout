@@ -23,7 +23,9 @@ orbit_velocity_random = 0.0
 linear_accel = 30.0
 scale = 4.0
 
-[node name="Ball" type="RigidBody2D"]
+[node name="Ball" type="RigidBody2D" groups=[
+"White",
+]]
 position = Vector2( 504, 480 )
 mode = 2
 physics_material_override = SubResource( 2 )

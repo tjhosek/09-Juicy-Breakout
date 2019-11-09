@@ -36,7 +36,9 @@ font_data = ExtResource( 5 )
 [node name="World" type="Node"]
 script = ExtResource( 1 )
 
-[node name="Background" type="ColorRect" parent="."]
+[node name="Background" type="ColorRect" parent="." groups=[
+"Black",
+]]
 modulate = Color( 0, 0, 0, 1 )
 show_behind_parent = true
 margin_left = -32.0
@@ -44,7 +46,9 @@ margin_top = -32.0
 margin_right = 1056.0
 margin_bottom = 608.0
 
-[node name="Stars" type="Particles2D" parent="."]
+[node name="Stars" type="Particles2D" parent="." groups=[
+"White",
+]]
 position = Vector2( 512, 0 )
 rotation = 1.5708
 amount = 300
@@ -52,6 +56,7 @@ lifetime = 40.0
 process_material = SubResource( 5 )
 
 [node name="Paddle" type="KinematicBody2D" parent="." groups=[
+"White",
 "Paddle",
 ]]
 position = Vector2( 512, 576 )
@@ -219,7 +224,9 @@ position = Vector2( 800, 128 )
 [node name="Tile9" parent="Tiles/RowE" instance=ExtResource( 4 )]
 position = Vector2( 896, 128 )
 
-[node name="Border" type="StaticBody2D" parent="."]
+[node name="Border" type="StaticBody2D" parent="." groups=[
+"White",
+]]
 editor/display_folded = true
 __meta__ = {
 "_edit_group_": true
@@ -243,7 +250,9 @@ position = Vector2( 9.53674e-007, 320 )
 scale = Vector2( 2, 18 )
 texture = ExtResource( 3 )
 
-[node name="Score" type="Label" parent="."]
+[node name="Score" type="Label" parent="." groups=[
+"White",
+]]
 margin_left = 64.0
 margin_top = 32.0
 margin_right = 160.0
@@ -253,7 +262,9 @@ text = "Score:"
 valign = 1
 script = ExtResource( 6 )
 
-[node name="Lives" type="Label" parent="."]
+[node name="Lives" type="Label" parent="." groups=[
+"White",
+]]
 margin_left = 864.0
 margin_top = 32.0
 margin_right = 960.0
@@ -263,7 +274,9 @@ text = "Lives:"
 valign = 1
 script = ExtResource( 7 )
 
-[node name="Combo" type="Label" parent="."]
+[node name="Combo" type="Label" parent="." groups=[
+"White",
+]]
 margin_left = 448.0
 margin_top = 32.0
 margin_right = 576.0
