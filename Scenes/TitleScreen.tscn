@@ -1,0 +1,77 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Scripts/TitleScreen.gd" type="Script" id=1]
+[ext_resource path="res://Scripts/Title.gd" type="Script" id=2]
+[ext_resource path="res://Assets/PressStart2P-Regular.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://Scripts/TitleLabel.gd" type="Script" id=4]
+
+[sub_resource type="DynamicFont" id=1]
+size = 80
+outline_size = 5
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=2]
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=3]
+font_data = ExtResource( 3 )
+
+[node name="TitleScreen" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+
+[node name="TitleNode2D" type="Node2D" parent="."]
+position = Vector2( 512, 224 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Title" type="Label" parent="TitleNode2D"]
+margin_left = -320.0
+margin_top = -96.0
+margin_right = 320.0
+margin_bottom = 67.0
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_outline_modulate = Color( 0.635294, 0, 0, 1 )
+text = "Breakout"
+align = 1
+valign = 1
+script = ExtResource( 4 )
+
+[node name="Tween" type="Tween" parent="TitleNode2D"]
+repeat = true
+playback/repeat = true
+
+[node name="QuitNode2D" type="Node2D" parent="."]
+position = Vector2( 224, 416 )
+
+[node name="Quit" type="Button" parent="QuitNode2D"]
+margin_left = 448.0
+margin_right = 576.0
+margin_bottom = 64.0
+focus_mode = 0
+custom_fonts/font = SubResource( 2 )
+enabled_focus_mode = 0
+text = "Quit"
+flat = true
+
+[node name="Tween" type="Tween" parent="QuitNode2D/Quit"]
+
+[node name="StartNode2D" type="Node2D" parent="."]
+
+[node name="Start" type="Button" parent="StartNode2D"]
+margin_left = 224.0
+margin_top = 416.0
+margin_right = 352.0
+margin_bottom = 480.0
+focus_mode = 0
+custom_fonts/font = SubResource( 3 )
+enabled_focus_mode = 0
+text = "Start"
+flat = true
+
+[node name="Tween" type="Tween" parent="StartNode2D/Start"]
+[connection signal="pressed" from="QuitNode2D/Quit" to="." method="_on_Quit_pressed"]
+[connection signal="pressed" from="StartNode2D/Start" to="." method="_on_Start_pressed"]

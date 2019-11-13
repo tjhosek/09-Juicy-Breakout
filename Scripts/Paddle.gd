@@ -10,6 +10,7 @@ var tweenMinScale = .5
 var tweenTime = .1
 
 
+
 func _ready():
 	set_process_input(true)
 	
@@ -21,7 +22,7 @@ func _physics_process(delta):
 	
 func _input(event):
 	if event is InputEventMouseButton and event.pressed:
-		if not get_parent().has_node("Ball"):
+		if not get_parent().has_node("Ball") and get_parent().lives > 0:
 			var ball = new_ball.instance()
 			ball.position = position - Vector2(0,32)
 			ball.name = "Ball"

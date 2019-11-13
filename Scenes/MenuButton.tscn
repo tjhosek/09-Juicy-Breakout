@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Assets/PressStart2P-Regular.ttf" type="DynamicFontData" id=1]
+
+[sub_resource type="DynamicFont" id=2]
+font_data = ExtResource( 1 )
+
+[node name="StartNode2D" type="Node2D"]
+
+[node name="Start" type="Button" parent="."]
+margin_left = 224.0
+margin_top = 416.0
+margin_right = 352.0
+margin_bottom = 480.0
+custom_fonts/font = SubResource( 2 )
+text = "Start"
+flat = true
+
+[node name="Tween" type="Tween" parent="Start"]
